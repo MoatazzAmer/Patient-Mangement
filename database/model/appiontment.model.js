@@ -1,6 +1,4 @@
 import { model, Schema, Types } from "mongoose";
-import {DateTime} from 'luxon'
-
 
 const schema = new Schema({
     doctor:{

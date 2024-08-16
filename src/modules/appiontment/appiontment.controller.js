@@ -61,7 +61,7 @@ const getAppointments = catchError(async (req, res, next) => {
     let apiFeature = new ApiFeatures(Appiontment.find(),req.query)
     .pagination().filter().sort().fields();
     const appiotment = await apiFeature.mongooseQuery
-    let totalAppiotment = Appiontment.countDocuments();
+    let totalAppiotment =await Appiontment.countDocuments();
 
     res.status(201).json({message:'Success',totalAppiotment,page:apiFeature.pageNumber ,appiotment});
 });

@@ -4,8 +4,8 @@ import { Doctor } from "../../../database/model/doctor.model.js";
 import { AppError } from "../../middleWare/AppError.js";
 import { catchError } from "../../middleWare/catchError.js";
 import { ApiFeatures } from '../../utils/apiFeatures.js';
-import { User } from '../../../database/model/user.model.js';
 import { DateTime } from 'luxon';
+import { User } from '../../../database/model/user.model.js';
 
 
 

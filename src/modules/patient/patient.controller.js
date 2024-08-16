@@ -8,12 +8,13 @@ import { ApiFeatures } from "../../utils/apiFeatures.js";
 
 const addPatientInfo = catchError(async(req,res,next)=>{
     // find User FirstName and lastName 
-    const user = await User.findById(req.body.user);
+    const user = await User.findOne({user: req.user.userId});
+    if(!user) return next(new AppError("user not found",409))
     // concat firstName+lasstName = fullName
     req.body.fullName = `${user.firstName} ${user.lastName}`
     // add Info Patient To datebase And Save 
     const patient = new Patient({
-        user : req.user.userId,
+        user : req.user._id,
         ...req.body
     });
     await patient.save()

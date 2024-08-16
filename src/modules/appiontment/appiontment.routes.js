@@ -8,7 +8,7 @@ const appiontmentRouter = Router();
 
 
 appiontmentRouter.post('/',protectedRoutes,referTo('patient','admin'),addAppiontment);
-appiontmentRouter.get('/get',protectedRoutes,referTo('admin'),getAppointments);
+appiontmentRouter.get('/get',getAppointments);
 appiontmentRouter.put('/:id',protectedRoutes,referTo('admin','patient'),updateAppiotment)
 appiontmentRouter.delete('/:id',protectedRoutes , referTo('patient' , 'admin'),deleteAppiotment)
 

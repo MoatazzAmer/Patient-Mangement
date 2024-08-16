@@ -13,10 +13,14 @@ const addUser = catchError(async(req,res,next)=>{
 })
 
 const getAllUser = catchError(async(req,res,next)=>{
-
     // ------------------------------------
     if(req.query.search){
-            mongooseQuery=mongooseQuery.find({firstName : {$regex: req.query.search , $options :'i'}})
+        let mongooseQuery=mongooseQuery.find({
+            $or: [
+                { firstName: { $regex: req.query.search, $options: 'i' } },
+                { role: { $regex: req.query.search, $options: 'i' } }
+            ]
+        })
         }
     //--------------------------
     let apiFeature =new ApiFeatures(User.find(),req.query)

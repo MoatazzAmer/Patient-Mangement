@@ -6,7 +6,7 @@ const schema = new Schema({
     specialization:{
         type: String,
         required : true,
-        enum :['gra7a','']
+        enum :['cardiology','surgery','pediatrics','oncology','neurology']
     },
     image:String,
     user:{
