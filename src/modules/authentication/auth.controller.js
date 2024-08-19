@@ -23,7 +23,7 @@ const signIn = catchError(async(req,res,next)=>{
     if (!user || !bcrypt.compareSync(req.body.password , user.password)){
         return next(new AppError('Incorrect Email Or Password' ,409))
     }
-    // make JWt
+    // make JW
     let token =jwt.sign({userId : user._id , role : user.role} ,  process.env.JWT_SEKERT_KEY)
     res.status(201).json({message : "Success Login" , token});
 });
