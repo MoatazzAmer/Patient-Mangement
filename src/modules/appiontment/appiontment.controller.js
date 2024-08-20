@@ -40,11 +40,7 @@ const addAppiontment = catchError(async(req,res,next)=>{
 
 // get doctors
 const getAppointments = catchError(async (req, res, next) => {
-        // ------------------------------------
-        if(req.query.search){
-            let mongooseQuery=mongooseQuery.find({status : {$regex: req.query.search , $options :'i'}})
-        }
-    //--------------------------
+
     const dateNow = DateTime.now();
     // remove dates that expired
     const appointments = await Appiontment.updateMany(
@@ -59,7 +55,7 @@ const getAppointments = catchError(async (req, res, next) => {
     );
     // let appointment = await Appiontment.find();
     let apiFeature = new ApiFeatures(Appiontment.find(),req.query)
-    .pagination().filter().sort().fields();
+    .pagination().filter().sort().fields().search();
     const appiotment = await apiFeature.mongooseQuery
     let totalAppiotment =await Appiontment.countDocuments();
 

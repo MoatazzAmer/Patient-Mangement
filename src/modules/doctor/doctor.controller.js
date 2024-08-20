@@ -54,11 +54,7 @@ const findDoctor = catchError(async(req,res,next)=>{
 });
 
 const findAllDoctor = catchError(async(req,res,next)=>{
-    // ------------------------------------
-        if(req.query.search){
-            let mongooseQuery=mongooseQuery.find({specialization : {$regex: req.query.search , $options :'i'}})
-        }
-    //--------------------------
+
     const dateNow = DateTime.now()
     Doctor.updateMany({},{
         $pull:{
@@ -69,7 +65,7 @@ const findAllDoctor = catchError(async(req,res,next)=>{
     })
     // find All Doctor With query
     let apiFeature =new ApiFeatures(Doctor.find().populate('user'),req.query)
-    .pagination().filter().sort().fields()
+    .pagination().filter().sort().fields().search()
     const doctors = await apiFeature.mongooseQuery
     let totalDoctor= await Doctor.countDocuments()
     

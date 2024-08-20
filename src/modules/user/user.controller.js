@@ -13,18 +13,9 @@ const addUser = catchError(async(req,res,next)=>{
 })
 
 const getAllUser = catchError(async(req,res,next)=>{
-    // ------------------------------------
-    if(req.query.search){
-        let mongooseQuery=mongooseQuery.find({
-            $or: [
-                { firstName: { $regex: req.query.search, $options: 'i' } },
-                { role: { $regex: req.query.search, $options: 'i' } }
-            ]
-        })
-        }
-    //--------------------------
+
     let apiFeature =new ApiFeatures(User.find(),req.query)
-    .pagination().filter().sort().fields()
+    .pagination().filter().sort().fields().search()
     const users = await apiFeature.mongooseQuery
     
     let totalUser = await User.countDocuments()

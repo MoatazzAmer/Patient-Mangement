@@ -34,13 +34,8 @@ const getSpecificPAtient = catchError(async(req,res,next)=>{
 
 const getAllPatient = catchError(async(req,res,next)=>{
 
-    // ------------------------------------
-    if(req.query.search){
-        let mongooseQuery=mongooseQuery.find({complaint : {$regex: req.query.search , $options :'i'}})
-    }
-    //--------------------------
     let apiFeature =new ApiFeatures(Patient.find(),req.query)
-    .pagination().filter().sort().fields()
+    .pagination().filter().sort().fields().search()
     const patients = await apiFeature.mongooseQuery
 
     let totalPatient = await Patient.countDocuments()

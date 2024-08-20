@@ -45,4 +45,15 @@ export class ApiFeatures {
         return this
     }
     
+    search() {
+        if (this.searchQuery.search) {
+        this.mongooseQuery = mongooseQuery.find({
+            $or: [
+            { title: { $regex: searchQuery.search, $options: "i" } },
+            { description: { $regex: searchQuery.search, $options: "i" } },
+        ],
+        });
+    }
+        return this;
+    }
 }
